@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.main-header {
+  background-color: #fff;
+  padding: 25px 0;
+  border-bottom: 2px solid #f2f2f2;
+  width: 100%;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  gap: 15px;
+}
+
+.header-contacts {
+  flex: 1;
+}
+
+.phones {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+}
+
+.phones a {
+  text-decoration: none;
+  color: #04304f;
+  font-weight: 700;
+  font-size: 15px;
+  transition: color 0.3s;
+}
+
+.header-address {
+  font-size: 13px;
+  color: #666;
+}
+
+.header-logo-section {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(10px, 3vw, 30px);
+}
+
+.hram-img {
+  height: 90px;
+  width: auto;
+}
+
+.header-title {
+  font-size: clamp(16px, 2.5vw, 24px);
+  text-align: center;
+  color: #04304f;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 0.8em;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.pigeon {
+  width: 55px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.support-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-donate {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #de3e51;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border: 2px solid #04304f;
+  box-shadow: 0 4px 10px rgba(4, 48, 79, 0.2);
+  white-space: nowrap;
+}
+
+.btn-donate:hover {
+  background-color: transparent;
+  color: #04304f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(4, 48, 79, 0.3);
+}
+
+@media (max-width: 1100px) {
+  .pigeon { display: none; }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .header-contacts, .support-container {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .phones {
+    flex-direction: row;
+    gap: 15px;
+  }
+}

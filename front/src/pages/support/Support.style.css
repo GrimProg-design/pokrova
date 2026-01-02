@@ -1,0 +1,220 @@
+.support-container-fixed {
+    width: 100%;
+    overflow-x: hidden; /* Чтобы ничего не вылетало на мобилках */
+}
+
+.support-page {
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.payment-display {
+  width: 100%;
+  max-width: 100%;
+  min-height: 380px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* --- ТЕЛЕФОН --- */
+.phone-mockup {
+  width: 220px;
+  height: 400px;
+  background: #1a1a1a;
+  border-radius: 35px;
+  border: 10px solid #04304f;
+  margin: 0 auto;
+  padding: 10px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: #f8f9fa;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+}
+
+.phone-label { font-size: 12px; color: #888; text-transform: uppercase; }
+.phone-number { font-weight: 800; font-size: 1.1rem; color: #04304f; }
+
+.copy-btn-inner {
+    background-color: #bbcfdd;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.copy-btn-inner:hover{
+    cursor: pointer;
+}
+
+/* Дизайн карты */
+.bank-card {
+  width: min(350px, 90vw);
+  height: 210px;
+  background: linear-gradient(135deg, #04304f 0%, #085082 100%);
+  border-radius: 18px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+  margin: 0 auto;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Тот самый золотой квадратик (чип) */
+.card-chip {
+  width: 50px;
+  height: 38px;
+  background: linear-gradient(135deg, #ffd87a 0%, #e6b84a 100%);
+  border-radius: 6px;
+  position: relative;
+}
+
+/* Эффект полосок на чипе для реализма */
+.card-chip::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(0,0,0,0.1) 11px);
+}
+
+.card-label {
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.card-middle {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.card-number {
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  letter-spacing: 2px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+.copy-btn-inner.card-btn {
+  width: 100%;
+  padding: 10px;
+  background: #ffd87a;
+  color: #04304f;
+  border-radius: 10px;
+  font-size: 13px;
+  box-shadow: 0 4px 0px #d4a73d; /* Небольшой эффект объема у кнопки */
+}
+
+.copy-btn-inner.card-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0px #d4a73d;
+}
+
+.copy-btn-inner.card-btn:hover {
+    cursor: pointer;
+}
+
+/* --- ТАБЫ (Адаптивные) --- */
+.payment-tabs {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  flex: 1;
+  max-width: 120px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.tab-btn:hover {
+    cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #04304f;
+  color: #ffd87a;
+  border-color: #04304f;
+}
+
+/* --- УВЕДОМЛЕНИЕ (TOAST) --- */
+.toast {
+  position: fixed;
+  bottom: -60px; /* Спрятан */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2ecc71;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+  z-index: 9999;
+}
+
+.toast.visible {
+  bottom: 30px; /* Всплывает */
+}
+
+.check-icon {
+  background: rgba(255,255,255,0.2);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+/* --- АДАПТИВ --- */
+@media (max-width: 480px) {
+    .phone-mockup { width: 190px; height: 350px; }
+    .bank-card { height: 180px; padding: 15px; }
+    .card-number { font-size: 1rem; }
+    .tab-btn { font-size: 12px; padding: 8px; }
+}
