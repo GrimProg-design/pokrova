@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Post, Body } from '@nestjs/common';
+import { Controller, Get, Query, Post, Body, Param } from '@nestjs/common';
 import { NewsService } from './news.service';
 import { GetNewsDto } from './news.dto';
 
@@ -14,5 +14,10 @@ export class NewsController {
   @Post()
   async create(@Body() body: any) {
     return this.newsService.create(body);
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return this.newsService.findOne(+id);
   }
 }

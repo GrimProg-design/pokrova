@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Post } from './post.entity';
 import { NewsModule } from './news/news.module';
+import { HistoryModule } from './history/history.module';
+import { DirectionsModule } from './directions/directions.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { NewsModule } from './news/news.module';
     }),
     TypeOrmModule.forFeature([Post]),
     NewsModule,
+    HistoryModule,
+    DirectionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

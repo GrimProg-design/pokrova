@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { NewsEntity } from './news.entity';
 import { GetNewsDto } from './news.dto';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class NewsService {
@@ -26,5 +27,13 @@ export class NewsService {
   async create(dto: any) {
     const newNews = this.newsRepository.create(dto);
     return await this.newsRepository.save(newNews);
+  }
+
+  async findOne(id: number) {
+    const news = await this.newsRepository.findOne({ where: { id } });
+    if (!news) {
+      throw new NotFoundException(`Новость с id ${id} не найдена`);
+    }
+    return news;
   }
 }

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"; // Установи: npm install react-router-dom
 import type { NewsItem } from "../../types/news.interface";
 import "./News_func.style.css";
 
@@ -5,7 +6,6 @@ interface Props {
   news: NewsItem[];
 }
 
-// универсальная функция для отображения новостей и подсчета их количества для дальнейшего применения стилей
 export default function NewsFunc({ news }: Props) {
   const count = news.length;
   const wrapperClass = `news-wrapper news-count-${Math.min(count, 6)}`;
@@ -13,24 +13,22 @@ export default function NewsFunc({ news }: Props) {
   return (
     <div className={wrapperClass}>
       {news.map((item) => (
-        <article key={item.id} className="news-item">
-          <h2>{item.title}</h2>
-
-          {/* Если есть путь к картинке — рисуем её */}
-          {item.imagePath && (
-            <img
-              src={`http://твой-nginx.com${item.imagePath}`}
-              alt={item.title}
-            />
-          )}
-
-          {/* Если есть видео — рисуем плеер */}
-          {item.videoPath && (
-            <video controls src={`http://твой-nginx.com${item.videoPath}`} />
-          )}
-
-          <p>{item.data}</p>
-        </article>
+        <Link to={`/news/${item.id}`} key={item.id} className="news-card">
+          {/* Теперь тут класс .news-card */}
+          <div className="news-card-image">
+            {item.imagePath ? (
+              <img
+                src={`http://localhost:3000${item.imagePath}`}
+                alt={item.title}
+              />
+            ) : (
+              <div className="placeholder">Нет фото</div>
+            )}
+          </div>
+          <div className="news-card-content">
+            <h2>{item.title}</h2>
+          </div>
+        </Link>
       ))}
     </div>
   );

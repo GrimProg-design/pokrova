@@ -1,46 +1,37 @@
-import type { JSX } from "react";
+import { useEffect, useState } from "react";
+import type { JSX } from "react"; 
 import "./Construction.style.css";
 import NewsFunc from "../../logics/news/News_func";
-import type { NewsDB } from "../../types/news.interface";
-
-const db: NewsDB = [
-  {
-    id: "1",
-    title: "Hello",
-    data: "Some data from db",
-  },
-  {
-    id: "2",
-    title: "Вторая новость",
-    data: "Текст второй новости",
-  },
-  {
-    id: "2",
-    title: "третья новость",
-    data: "Текст второй новости",
-  },
-  {
-    id: "2",
-    title: "четвертая новость",
-    data: "Текст второй новости",
-  },
-  {
-    id: "2",
-    title: "Пятая новость",
-    data: "Текст второй новости",
-  },
-  {
-    id: "2",
-    title: "Шестая новость",
-    data: "Текст второй новости",
-  },
-];
+import type { NewsItem } from "../../types/news.interface";
 
 export default function Construction(): JSX.Element {
+  const [news, setNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/news?type=construction&limit=6")
+      .then((res) => res.json())
+      .then((data) => {
+        setNews(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Ошибка загрузки новостей строительства:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <div className="loader">Загрузка данных по строительству...</div>;
+
   return (
     <div className="construction-wrapper">
       <h1 className="construction-title">Ремонт и строительство</h1>
-      <NewsFunc news={db} />
+      
+      {news.length > 0 ? (
+        <NewsFunc news={news} />
+      ) : (
+        <p className="no-news">Пока новостей о строительстве нет.</p>
+      )}
     </div>
   );
 }

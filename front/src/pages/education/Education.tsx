@@ -1,19 +1,21 @@
-import type { JSX } from "react";
-import "./Education.style.css"
+import { useEffect, useState } from "react";
 import Section_func from "../../logics/sections/Section_func";
+import type { Sec_prop } from "../../types/sections.interface";
+import "./Education.style.css"
 
-const db = [
-    {id: '1', title: 'Education'},
-    {id: '2', title: 'Education2'},
-    {id: '3', title: 'Education3'},
-    {id: '4', title: 'Education4'},
-]
+export default function Education() {
+    const [sections, setSections] = useState<Sec_prop[]>([]);
 
-export default function Education(): JSX.Element {
+    useEffect(() => {
+        fetch("http://localhost:3000/api/directions?category=education")
+            .then(res => res.json())
+            .then(data => setSections(data));
+    }, []);
+
     return(
         <div className="education-wrapper">
             <h1 className="education-title">Образование</h1>
-            <Section_func sections={db}/>
+            <Section_func sections={sections}/>
         </div>
     )
 }

@@ -13,11 +13,19 @@ const Contacts = lazy(() => import("./pages/contacts/Contscts"))
 
 // Боковое меню
 const Education = lazy(() => import("./pages/education/Education"))
+const Social = lazy(() => import("./pages/social/Social"))
 const Cossacks = lazy(() => import("./pages/cossacks/Cossacks"));
 const Construction = lazy(() => import("./pages/construction/Construction"));
+const Decoration = lazy(() => import("./pages/decoration/Decoration"))
 
 // Кнопка поддержки
 const Support = lazy(() => import("./pages/support/Support"))
+
+// Новости
+const NewsDetails = lazy(() => import("./logics/news/NewsDetails"));
+
+// Секции
+const SectionDetails = lazy(() => import("./logics/sections/SectionDetails"))
 
 // Ошибки
 const NotFound = () => (
@@ -43,11 +51,19 @@ function App() {
 
               {/* Боковое меню */}
               <Route path="/education" element={<Education/>}/>
+              <Route path="/social-service" element={<Social/>}/>
               <Route path="/cossacks" element={<Cossacks />} />
               <Route path="/construction" element={<Construction/>}/>
+              <Route path="/decoration" element={<Decoration/>}/>
 
               {/* Кнопка поддержки */}
               <Route path="/support" element={<Support />} />
+
+              {/* Новости */}
+              <Route path="/news/:id" element={<NewsDetails />} />
+
+              {/* Секции */}
+              <Route path="/directions/:id" element={<SectionDetails/>}/>
 
               {/* Ошибки */}
               <Route path="*" element={<NotFound />} />
