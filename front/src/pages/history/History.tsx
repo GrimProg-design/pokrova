@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { JSX } from "react";
+import "./History.css"
 
 interface HistoryData {
   title: string;
@@ -23,7 +24,6 @@ export default function History(): JSX.Element {
       <h2 className="h2-title">{data.title}</h2>
       <div 
         className="history-content"
-        // Эта штука превратит строку с тегами из БД в реальный HTML
         dangerouslySetInnerHTML={{ __html: data.content }} 
       />
     </section>

@@ -7,6 +7,9 @@ import { Post } from './post.entity';
 import { NewsModule } from './news/news.module';
 import { HistoryModule } from './history/history.module';
 import { DirectionsModule } from './directions/directions.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { AuthController } from './auth/auth.controller';
 
 @Module({
   imports: [
@@ -29,8 +32,13 @@ import { DirectionsModule } from './directions/directions.module';
     NewsModule,
     HistoryModule,
     DirectionsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), 'uploads'),
+      serveRoot: '/uploads',
+      exclude: ['/api/(.*)'],
+    }),
   ],
-  controllers: [AppController],
+  controllers: [AppController, AuthController, AuthController],
   providers: [AppService],
 })
 export class AppModule {}
