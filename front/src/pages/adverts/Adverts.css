@@ -1,0 +1,77 @@
+.adverts-page {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.adverts-tools {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.adverts-tools input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.adverts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.ad-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ad-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: #fff;
+}
+
+.ad-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ad-price {
+    font-weight: bold;
+    color: #2c3e50;
+    background: #e1f5fe;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+.ad-content {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+    line-height: 1.6;
+    animation: fadeIn 0.3s ease;
+}
+
+.expand-hint {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 10px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .adverts-tools { flex-direction: column; }
+}

@@ -10,6 +10,7 @@ import { PrivateRoute } from "./defence/PrivateRoute";
 const Home = lazy(() => import("./pages/home/Home"));
 const History = lazy(() => import("./pages/history/History"));
 const Schedule = lazy(() => import("./pages/Schedule/Schedule"));
+const Adverts = lazy(() => import("./pages/adverts/Adverts"))
 const Contacts = lazy(() => import("./pages/contacts/Contscts"));
 
 // Боковое меню
@@ -55,6 +56,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/history" element={<History />} />
               <Route path="/schedule" element={<Schedule />} />
+              <Route path="/adverts" element={<Adverts />} />
               <Route path="/contacts" element={<Contacts />} />
 
               {/* Боковое меню */}

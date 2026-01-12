@@ -8,7 +8,7 @@ const navLinks = [
   { path: "/", value: "Главная" },
   { path: "/history", value: "История прихода" },
   { path: "/schedule", value: "Расписание" },
-  { path: "/advert", value: "Объявление" },
+  { path: "/adverts", value: "Объявление" },
   { path: "/contacts", value: "Контакты" }
 ];
 
