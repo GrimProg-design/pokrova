@@ -22,8 +22,9 @@ const navLinksSidebar: SidebarConfig = {
     { path: '/decoration', text: 'Украшение Храма' },
   ],
   archive: [
-    { path: '/news/main', text: 'Главные новости' },
-    { path: '/news/cossacks', text: 'Новости казаков' },
+    { path: '/archive/main', text: 'Главные новости' },
+    { path: '/archive/cossack', text: 'Новости казаков' },
+    { path: '/archive/construction', text: 'Новости строительста' }
   ]
 };
 

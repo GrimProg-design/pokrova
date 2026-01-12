@@ -15,6 +15,7 @@ import { extname } from 'path';
 import { NewsService } from './news.service';
 import { GetNewsDto } from './news.dto';
 import { AdminGuard } from 'src/auth/auth.guard';
+import { ParseIntPipe, BadRequestException } from '@nestjs/common';
 
 @Controller('news')
 export class NewsController {
@@ -23,6 +24,18 @@ export class NewsController {
   @Get()
   async findAll(@Query() query: GetNewsDto) {
     return this.newsService.getNews(query);
+  }
+
+  @Get('archive')
+  async getArchive(@Query() query: GetNewsDto) {
+    return this.newsService.getArchive(query);
+  }
+
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    // Теперь 'id' гарантированно число. 
+    // Если прилетит строка или NaN, NestJS сам вернет 400 Bad Request клиенту.
+    return this.newsService.findOne(id);
   }
 
   @UseGuards(AdminGuard)
@@ -42,10 +55,5 @@ export class NewsController {
       imagePath: file ? `/uploads/news/${file.filename}` : null,
     };
     return this.newsService.create(newsData);
-  }
-
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return this.newsService.findOne(+id);
   }
 }

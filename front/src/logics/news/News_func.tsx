@@ -1,15 +1,19 @@
-import { Link } from "react-router-dom"; // Установи: npm install react-router-dom
+import { Link } from "react-router-dom";
 import type { NewsItem } from "../../types/news.interface";
 import "./News_func.style.css";
 
 interface Props {
   news: NewsItem[];
+  isArchive?: boolean; // Новый флаг для переключения режима
 }
-// ... (импорты те же)
 
-export default function NewsFunc({ news }: Props) {
+export default function NewsFunc({ news, isArchive }: Props) {
   const count = news.length;
-  const wrapperClass = `news-wrapper news-count-${Math.min(count, 6)}`;
+
+  // Если это архив, используем простой класс сетки, иначе — твою хитрую логику
+  const wrapperClass = isArchive 
+    ? "news-wrapper news-archive-grid" 
+    : `news-wrapper news-count-${Math.min(count, 6)}`;
 
   return (
     <div className={wrapperClass}>

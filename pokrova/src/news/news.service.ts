@@ -36,4 +36,28 @@ export class NewsService {
     }
     return news;
   }
+
+  async getArchive(queryDto: GetNewsDto) {
+    const { type, limit = 4, page = 1 } = queryDto; // По умолчанию 4 новости и 1 страница
+    const skip = (page - 1) * limit;
+
+    const query = this.newsRepository.createQueryBuilder('news');
+
+    if (type) {
+      query.where('news.type = :type', { type });
+    }
+
+    const [items, total] = await query
+      .orderBy('news.createdAt', 'DESC')
+      .take(limit)
+      .skip(skip)
+      .getManyAndCount();
+
+    return {
+      items,
+      total,
+      totalPages: Math.ceil(total / limit),
+      currentPage: +page,
+    };
+  }
 }

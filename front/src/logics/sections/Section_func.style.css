@@ -70,3 +70,56 @@
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
+
+.sections-wrapper {
+  display: grid;
+  gap: 15px;
+}
+
+/* Общие стили для карточки-ссылки */
+.section-item-link {
+  position: relative;
+  display: flex;
+  align-items: flex-end; /* Заголовок будет внизу */
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #e7e7e7;
+  background-position: center;
+  background-size: cover; /* Фото на весь блок */
+  background-repeat: no-repeat;
+  text-decoration: none;
+  overflow: hidden;
+  min-height: 200px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.section-item-link:hover {
+  transform: translateY(-5px); /* Легкий подъем вместо scale */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Стили заголовка */
+.section-title {
+  color: white;
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); /* Тень для читаемости */
+  z-index: 2;
+}
+
+/* Твоя логика сетки (оставляем без изменений) */
+.sections-count-2 { grid-template-columns: repeat(2, 1fr); }
+
+.sections-count-3 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 232px);
+}
+.sections-count-3 .section-item-link:nth-child(3) {
+    grid-column: 1 / 3;
+}
+
+.sections-count-4 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 232px);
+}

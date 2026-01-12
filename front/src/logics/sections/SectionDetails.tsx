@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import "./SectionDetails.css";
 
 interface SectionsItem {
   id: number;
   title: string;
   content: string;
   imagePath?: string;
+  innerImage1?: string;
+  innerImage2?: string;
   category: string;
 }
 
@@ -24,27 +27,42 @@ export default function SectionsDetails() {
 
   if (!item) return <div className="loader">Загрузка...</div>;
 
+  const API = "http://localhost:3000";
+
   return (
     <article className="direction-details">
-      <button className="back-btn" onClick={() => navigate(-1)}>
-        ← Назад
-      </button>
-
       <header className="details-header">
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          ← Назад
+        </button>
         <h1>{item.title}</h1>
       </header>
 
-      {item.imagePath && (
-        <div className="details-image">
-          <img src={`http://localhost:3000${item.imagePath}`} alt={item.title} />
+      <div
+        className="details-content"
+        dangerouslySetInnerHTML={{ __html: item.content }}
+      />
+
+      {(item.innerImage1 || item.innerImage2) && (
+        <div className="inner-images-grid">
+          {item.innerImage1 && (
+            <div className="inner-img-wrapper">
+              <img
+                src={`${API}${item.innerImage1}`}
+                alt="Дополнительное фото 1"
+              />
+            </div>
+          )}
+          {item.innerImage2 && (
+            <div className="inner-img-wrapper">
+              <img
+                src={`${API}${item.innerImage2}`}
+                alt="Дополнительное фото 2"
+              />
+            </div>
+          )}
         </div>
       )}
-
-      {/* Выводим наш отформатированный HTML из базы */}
-      <div 
-        className="details-content"
-        dangerouslySetInnerHTML={{ __html: item.content }} 
-      />
     </article>
   );
 }

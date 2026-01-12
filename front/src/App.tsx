@@ -28,6 +28,9 @@ const NewsDetails = lazy(() => import("./logics/news/NewsDetails"));
 // Секции
 const SectionDetails = lazy(() => import("./logics/sections/SectionDetails"));
 
+// Архив
+const Archive = lazy(() => import("./pages/archive/Archive"));
+
 // Ошибки
 const NotFound = () => (
   <div style={{ padding: "20px" }}>404 — Страница не найдена</div>
@@ -69,6 +72,9 @@ function App() {
 
               {/* Секции */}
               <Route path="/directions/:id" element={<SectionDetails />} />
+
+              {/* Архив */}
+              <Route path="/archive/:type" element={<Archive />} />
 
               {/* Ошибки */}
               <Route path="*" element={<NotFound />} />

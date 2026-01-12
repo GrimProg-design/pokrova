@@ -1,6 +1,7 @@
 export interface Sec_prop {
-    id: string;
+    id: number;
     title: string;
+    imagePath?: string;
 }
 
-export type SecDB = Sec_prop[]
+export type SecDB = Sec_prop[];

@@ -10,6 +10,7 @@ import { DirectionsModule } from './directions/directions.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthController } from './auth/auth.controller';
+import { AdvertsModule } from './adverts/adverts.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { AuthController } from './auth/auth.controller';
       serveRoot: '/uploads',
       exclude: ['/api/(.*)'],
     }),
+    AdvertsModule,
   ],
   controllers: [AppController, AuthController, AuthController],
   providers: [AppService],

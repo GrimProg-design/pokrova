@@ -11,8 +11,14 @@ export class DirectionEntity {
   @Column({ type: 'text' })
   content: string;
 
-  @Column({ nullable: true })
+  @Column() 
   imagePath: string;
+
+  @Column({ nullable: true }) // Доп. фото 1
+  innerImage1: string;
+
+  @Column({ nullable: true }) // Доп. фото 2
+  innerImage2: string;
 
   @Column()
   category: string;

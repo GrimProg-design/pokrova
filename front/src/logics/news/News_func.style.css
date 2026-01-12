@@ -205,3 +205,17 @@
   transform: scale(1.02);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
+
+/* Новая сетка специально для архива */
+.news-archive-grid {
+  grid-template-columns: repeat(2, 1fr) !important; /* Строго 2 колонки */
+  grid-auto-rows: 232px !important; /* Фиксированная высота как в твоих стилях */
+  gap: 20px !important;
+}
+
+/* Сбрасываем все nth-child правила, которые ты писал для news-count-4 */
+.news-archive-grid .news-card {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  height: 232px; /* Чтобы все были одной высоты */
+}
