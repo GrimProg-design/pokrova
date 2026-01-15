@@ -11,7 +11,7 @@ export default function History(): JSX.Element {
   const [data, setData] = useState<HistoryData | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/history")
+    fetch(`${import.meta.env.VITE_API_URL}/history`)
       .then((res) => res.json())
       .then((resData) => setData(resData))
       .catch((err) => console.error("Ошибка загрузки истории:", err));

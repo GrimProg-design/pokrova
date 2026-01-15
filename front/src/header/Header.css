@@ -110,19 +110,39 @@
   .pigeon { display: none; }
 }
 
+/* Добавь это в медиа-запрос 768px в Header.css */
 @media (max-width: 768px) {
+  .header-contacts {
+    display: none; /* Скрываем контакты в шапке на мобилках */
+  }
+
   .header-content {
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row; /* Возвращаем в ряд */
+    justify-content: space-between;
+    padding: 10px 15px;
   }
-  
-  .header-contacts, .support-container {
-    justify-content: center;
-    text-align: center;
+
+  .header-logo-section {
+    flex: 1;
+    justify-content: flex-start; /* Прижимаем лого к леву */
+    gap: 10px;
   }
-  
-  .phones {
-    flex-direction: row;
-    gap: 15px;
+
+  .hram-img {
+    height: 50px; /* Уменьшаем картинку, чтобы влезла */
+  }
+
+  .header-title {
+    font-size: 14px; /* Уменьшаем шрифт */
+    text-align: left;
+  }
+
+  .support-container {
+    flex: 0; /* Кнопка занимает только нужное место */
+  }
+
+  .btn-donate {
+    padding: 8px 16px;
+    font-size: 12px;
   }
 }

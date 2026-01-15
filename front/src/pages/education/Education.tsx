@@ -7,7 +7,7 @@ export default function Education() {
     const [sections, setSections] = useState<Sec_prop[]>([]);
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/directions?category=education")
+        fetch(`${import.meta.env.VITE_API_URL}/directions?category=education`)
             .then(res => res.json())
             .then(data => setSections(data));
     }, []);

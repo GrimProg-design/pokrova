@@ -1,97 +1,93 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Adverts.css";
 
 interface Advert {
   id: number;
   title: string;
-  content: string;
   price: string;
-  createdAt: string;
+  images: string[]; // Поменяли на массив
 }
 
 export default function Adverts() {
   const [ads, setAds] = useState<Advert[]>([]);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("all");
-  const [expandedId, setExpandedId] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const controller = new AbortController();
-
     async function loadData() {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/adverts?search=${encodeURIComponent(search)}&sort=${sort}`,
+          `${import.meta.env.VITE_API_URL}/adverts?search=${encodeURIComponent(
+            search
+          )}&sort=${sort}`,
           { signal: controller.signal }
         );
-        
-        if (!res.ok) {
-          throw new Error(`Ошибка сервера: ${res.status}`);
-        }
-        
-        const data = (await res.json()) as Advert[];
+        const data = await res.json();
         setAds(data);
-      } catch (error: unknown) {
-        // Проверяем, что ошибка — это не отмена запроса
-        if (error instanceof Error && error.name !== 'AbortError') {
-          console.error("Ошибка загрузки:", error.message);
-        }
+      } catch (error) {
+        if ((error as Error).name !== "AbortError") console.error(error);
       }
     }
-
     loadData();
-
     return () => controller.abort();
   }, [search, sort]);
 
-  const toggleExpand = (id: number) => {
-    setExpandedId(expandedId === id ? null : id);
-  };
-
   return (
-    <div className="adverts-page">
-      <h1>Объявления</h1>
+    <div className="adverts-container">
+      <header className="adverts-header">
+        <h1>Объявления</h1>
+        <div className="adverts-tools">
+          <div className="search-wrapper">
+            <span className="search-icon">🔍</span>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Поиск объявлений..."
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
 
-      <div className="adverts-tools">
-        <input 
-          type="text" 
-          placeholder="Поиск..." 
-          onChange={(e) => setSearch(e.target.value)} 
-        />
-        <select onChange={(e) => setSort(e.target.value)}>
-          <option value="all">Все</option>
-          <option value="new">Сначала новые</option>
-          <option value="old">Сначала старые</option>
-        </select>
-      </div>
-
-      <div className="adverts-list">
-        {ads.length > 0 ? (
-          ads.map((ad) => (
-            <div 
-              key={ad.id} 
-              className={`ad-card ${expandedId === ad.id ? "expanded" : ""}`}
-              onClick={() => toggleExpand(ad.id)}
+          <div className="filter-wrapper">
+            <select
+              className="sort-select"
+              onChange={(e) => setSort(e.target.value)}
             >
-              <div className="ad-header">
-                <h3>{ad.title}</h3>
-                <span className="ad-price">{ad.price || "Бесплатно"}</span>
-              </div>
-              
-              {expandedId === ad.id && (
-                <div className="ad-content">
-                  <p>{ad.content}</p>
-                  <small>Опубликовано: {new Date(ad.createdAt).toLocaleDateString()}</small>
-                </div>
+              <option value="all">🔥 Рекомендуем</option>
+              <option value="new">🆕 Новинки</option>
+              <option value="old">⏳ Старые</option>
+            </select>
+          </div>
+        </div>
+      </header>
+
+      <div className="adverts-grid">
+        {ads.map((ad) => (
+          <div
+            key={ad.id}
+            className="ad-item"
+            onClick={() => navigate(`/advert/${ad.id}`)}
+          >
+            <div className="ad-image-wrapper">
+              {ad.images && ad.images.length > 0 ? (
+                // Берем ПЕРВУЮ фотку для превью
+                <img
+                  src={`${import.meta.env.VITE_API_URL_BASE}${ad.images[0]}`}
+                  alt={ad.title}
+                />
+              ) : (
+                <div className="ad-placeholder">Нет фото</div>
               )}
-              <div className="expand-hint">
-                 {expandedId === ad.id ? "Свернуть ▲" : "Подробнее ▼"}
-              </div>
+              {ad.images?.length > 1 && <span className="photo-count"></span>}
             </div>
-          ))
-        ) : (
-          <p className="no-data">Объявлений не найдено</p>
-        )}
+            <div className="ad-info">
+              <span className="ad-item-price">{ad.price || "Договорная"}</span>
+              <h3 className="ad-item-title">{ad.title}</h3>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

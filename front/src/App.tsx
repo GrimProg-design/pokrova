@@ -10,7 +10,8 @@ import { PrivateRoute } from "./defence/PrivateRoute";
 const Home = lazy(() => import("./pages/home/Home"));
 const History = lazy(() => import("./pages/history/History"));
 const Schedule = lazy(() => import("./pages/Schedule/Schedule"));
-const Adverts = lazy(() => import("./pages/adverts/Adverts"))
+const Adverts = lazy(() => import("./pages/adverts/Adverts"));
+const AdvertDetails = lazy(() => import("./pages/adverts/AdvertDetails"))
 const Contacts = lazy(() => import("./pages/contacts/Contscts"));
 
 // Боковое меню
@@ -31,6 +32,9 @@ const SectionDetails = lazy(() => import("./logics/sections/SectionDetails"));
 
 // Архив
 const Archive = lazy(() => import("./pages/archive/Archive"));
+
+// Футер
+const Footer = lazy(() => import("./footer/Footer"))
 
 // Ошибки
 const NotFound = () => (
@@ -57,6 +61,7 @@ function App() {
               <Route path="/history" element={<History />} />
               <Route path="/schedule" element={<Schedule />} />
               <Route path="/adverts" element={<Adverts />} />
+              <Route path="/advert/:id" element={<AdvertDetails />} />
               <Route path="/contacts" element={<Contacts />} />
 
               {/* Боковое меню */}
@@ -96,8 +101,8 @@ function App() {
             </Routes>
           </Suspense>
         </main>
-
         <Sidebar />
+        <Footer/>
       </div>
     </BrowserRouter>
   );

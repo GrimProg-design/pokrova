@@ -11,6 +11,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthController } from './auth/auth.controller';
 import { AdvertsModule } from './adverts/adverts.module';
+import { ContactsModule } from './contacts/contacts.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { AdvertsModule } from './adverts/adverts.module';
       exclude: ['/api/(.*)'],
     }),
     AdvertsModule,
+    ContactsModule,
   ],
   controllers: [AppController, AuthController, AuthController],
   providers: [AppService],

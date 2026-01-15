@@ -1,77 +1,176 @@
-.adverts-page {
-    padding: 20px;
-    max-width: 800px;
+.adverts-container {
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
+}
+
+.adverts-header {
+    margin-bottom: 30px;
 }
 
 .adverts-tools {
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.adverts-tools input {
-    flex: 1;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-.adverts-list {
-    display: flex;
-    flex-direction: column;
     gap: 15px;
+    margin-top: 15px;
 }
 
-.ad-card {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.ad-card:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    background: #fff;
-}
-
-.ad-header {
+.adverts-tools {
     display: flex;
-    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 30px;
     align-items: center;
 }
 
-.ad-price {
-    font-weight: bold;
+/* Контейнер поиска */
+.search-wrapper {
+    position: relative;
+    flex: 2; /* Поиск шире, чем селект */
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    padding: 14px 15px 14px 45px; /* Отступ слева под иконку */
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background-color: #f1f3f5;
+    font-size: 16px;
     color: #2c3e50;
-    background: #e1f5fe;
-    padding: 5px 10px;
-    border-radius: 6px;
+    transition: all 0.3s ease;
 }
 
-.ad-content {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px dashed #ccc;
-    line-height: 1.6;
-    animation: fadeIn 0.3s ease;
+.search-input:focus {
+    outline: none;
+    background-color: #fff;
+    border-color: #04304f; /* Твой фирменный синий */
+    box-shadow: 0 4px 15px rgba(4, 48, 79, 0.1);
 }
 
-.expand-hint {
-    text-align: center;
-    font-size: 0.8rem;
-    color: #888;
-    margin-top: 10px;
+/* Стилизация Селектора */
+.filter-wrapper {
+    flex: 1;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+.sort-select {
+    width: 100%;
+    padding: 14px 15px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background-color: #f1f3f5;
+    font-size: 15px;
+    font-weight: 600;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none; /* Убираем стандартную стрелку браузера */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%232c3e50' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
 }
 
-/* Адаптивность */
+.sort-select:focus {
+    outline: none;
+    border-color: #04304f;
+    background-color: #fff;
+}
+
+/* СЕТКА КАК НА WB */
+.adverts-grid {
+    display: grid;
+    /* На ПК 4 колонки, на планшете 3, на мобилках 2 */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.ad-item {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.ad-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.ad-image-wrapper {
+    width: 100%;
+    aspect-ratio: 3/4; /* Вертикальный формат как на WB */
+    background: #f0f0f0;
+}
+
+.ad-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ad-info {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.ad-item-price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #222;
+}
+
+.ad-item-title {
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 400;
+    
+    /* Обрезка текста до 2 строк */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Оставляем как есть */
+    line-clamp: 2;         /* Добавляем стандартное свойство для линтера */
+    
+    overflow: hidden;
+    word-break: break-word; /* На случай очень длинных слов */
+}
+
 @media (max-width: 600px) {
-    .adverts-tools { flex-direction: column; }
+    .adverts-grid {
+        grid-template-columns: 1fr 1fr; /* На мобилках строго 2 в ряд */
+        gap: 10px;
+    }
+    .ad-item-price { font-size: 1rem; }
+}
+
+@media (max-width: 768px) {
+    .adverts-tools {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-wrapper, .filter-wrapper {
+        width: 100%;
+    }
+
+    .search-input {
+        padding: 12px 12px 12px 40px;
+        font-size: 14px;
+    }
+
+    .sort-select {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
 }

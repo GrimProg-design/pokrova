@@ -7,7 +7,7 @@ export default function Decoration() {
     const [sections, setSections] = useState<Sec_prop[]>([]);
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/directions?category=decoration")
+        fetch(`${import.meta.env.VITE_API_URL}/directions?category=decoration`)
             .then(res => res.json())
             .then(data => setSections(data))
             .catch(err => console.error("Ошибка загрузки украшения:", err));

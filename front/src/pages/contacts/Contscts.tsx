@@ -1,40 +1,52 @@
-import type { JSX } from "react";
-import "./Contacts.style.css"
+import { useEffect, useState } from "react";
+import "./Contacts.style.css";
 
-interface con {
-  id: string;
-  name: string;
-  desc: string;
+interface IContact {
+  id: number;
+  fullName: string;
+  position: string;
+  image: string;
+  bio: string;
 }
 
-const contacts: con[] = [
-  {
-    id: "1",
-    name: "Ilia",
-    desc: "progger",
-  },
-  {
-    id: "1",
-    name: "Ilia",
-    desc: "progger",
-  },
-  {
-    id: "1",
-    name: "Ilia",
-    desc: "progger",
-  },
-];
+export default function Contacts() {
+  const [people, setPeople] = useState<IContact[]>([]);
+  const API_BASE = import.meta.env.VITE_API_URL_BASE;
 
-export default function Contacts(): JSX.Element {
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/contacts`)
+      .then((res) => res.json())
+      .then((data) => setPeople(data))
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
-    <div className="contacts-wrapper">
-        <h1 className="contacts-title">Контакты</h1>
-        {contacts.map(contact => (
-            <article key={contact.id} className="contacts-item">
-                <h2>{contact.name}</h2>
-                <p>{contact.desc}</p>
-            </article>
+    <section className="contacts-page">
+      <h1 className="h2-title">Контакты</h1>
+      <div className="contacts-grid">
+        {people.map((person) => (
+          <article key={person.id} className="contact-card">
+            <div className="inside-button">
+              <figure className="photo-wrapper">
+                <img
+                  src={
+                    person.image
+                      ? `${API_BASE}${person.image}`
+                      : "/placeholder-user.png"
+                  }
+                  alt={person.fullName}
+                  className="contact-img"
+                />
+                <figcaption>{person.fullName}</figcaption>
+              </figure>
+              <div className="info-wrapper">
+                <h3>{person.position}</h3>
+                <p className="main-about-contacts">{person.bio}</p>
+              </div>
+            </div>
+          </article>
         ))}
-    </div>
+      </div>
+    </section>
   );
 }

@@ -7,7 +7,7 @@ export default function Social() {
     const [sections, setSections] = useState<Sec_prop[]>([]);
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/directions?category=social")
+        fetch(`${import.meta.env.VITE_API_URL}/directions?category=social`)
             .then(res => res.json())
             .then(data => setSections(data))
             .catch(err => console.error("Ошибка загрузки социалки:", err));

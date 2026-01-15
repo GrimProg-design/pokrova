@@ -16,8 +16,6 @@ export default function Archive() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
 
-  const API = "http://localhost:3000";
-
   const titles: Record<string, string> = {
     main: "Главные новости",
     cossack: "Казачество",
@@ -39,7 +37,7 @@ export default function Archive() {
       setLoading(true);
       try {
         const response = await fetch(
-          `${API}/api/news/archive?type=${type}&page=${page}&limit=4`
+          `${import.meta.env.VITE_API_URL}/news/archive?type=${type}&page=${page}&limit=4`
         );
         const resData = await response.json();
 

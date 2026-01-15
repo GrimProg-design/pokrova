@@ -12,7 +12,11 @@ export class AdvertEntity {
   content: string;
 
   @Column({ nullable: true })
-  price: string; // Можно строкой, если "Договорная" или "Бесплатно"
+  price: string;
+
+  // Храним пути к файлам как массив строк
+  @Column('simple-array', { nullable: true })
+  images: string[]; 
 
   @Column({ default: true })
   isActive: boolean;

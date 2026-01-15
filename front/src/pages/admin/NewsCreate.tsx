@@ -17,7 +17,7 @@ export default function AdminNews() {
     formData.append('type', type);
     if (image) formData.append('image', image);
 
-    const res = await fetch('http://localhost:3000/api/news', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/news`, {
       method: 'POST',
       body: formData,
       headers: {

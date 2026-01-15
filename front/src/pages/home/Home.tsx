@@ -9,7 +9,7 @@ export default function Home(): JSX.Element {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/news?type=main&limit=6")
+    fetch(`${import.meta.env.VITE_API_URL}/news?type=main&limit=6`)
       .then((res) => res.json())
       .then((data) => {
         setNews(data);

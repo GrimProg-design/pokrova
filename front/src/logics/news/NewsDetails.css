@@ -12,6 +12,10 @@
     object-fit: cover;
 }
 
+.direction-details {
+    padding: 20px;
+}
+
 .details-content p {
     font-size: 1.1rem;
     line-height: 1.6;
