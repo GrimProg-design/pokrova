@@ -60,4 +60,16 @@ export class NewsService {
       currentPage: +page,
     };
   }
+
+  async remove(id: number) {
+    const news = await this.findOne(id);
+    return await this.newsRepository.remove(news);
+  }
+
+  // Обновление
+  async update(id: number, dto: any) {
+    const news = await this.findOne(id);
+    Object.assign(news, dto);
+    return await this.newsRepository.save(news);
+  }
 }

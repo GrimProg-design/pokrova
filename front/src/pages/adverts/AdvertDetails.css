@@ -11,6 +11,16 @@
   margin-top: 20px;
 }
 
+.back-link {
+    grid-column: 1;
+    background: none;
+    border: 1px solid #ccc;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
 /* ГАЛЕРЕЯ С ЭФФЕКТОМ SNAP */
 .slider-container {
   display: flex;

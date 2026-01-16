@@ -11,7 +11,7 @@ const Home = lazy(() => import("./pages/home/Home"));
 const History = lazy(() => import("./pages/history/History"));
 const Schedule = lazy(() => import("./pages/Schedule/Schedule"));
 const Adverts = lazy(() => import("./pages/adverts/Adverts"));
-const AdvertDetails = lazy(() => import("./pages/adverts/AdvertDetails"))
+const AdvertDetails = lazy(() => import("./pages/adverts/AdvertDetails"));
 const Contacts = lazy(() => import("./pages/contacts/Contscts"));
 
 // Боковое меню
@@ -34,7 +34,7 @@ const SectionDetails = lazy(() => import("./logics/sections/SectionDetails"));
 const Archive = lazy(() => import("./pages/archive/Archive"));
 
 // Футер
-const Footer = lazy(() => import("./footer/Footer"))
+const Footer = lazy(() => import("./footer/Footer"));
 
 // Ошибки
 const NotFound = () => (
@@ -44,6 +44,8 @@ const NotFound = () => (
 // Админка
 const Login = lazy(() => import("./pages/Login"));
 const AdminNews = lazy(() => import("./pages/admin/NewsCreate"));
+const AdminSidebar = lazy(() => import("./pages/admin/AdminSidebar"));
+const AdminNewsList = lazy(() => import("./pages/admin/AdminNewsList"));
 
 function App() {
   return (
@@ -93,16 +95,21 @@ function App() {
                 element={
                   <PrivateRoute>
                     <div className="admin-layout">
-                      <AdminNews />
+                      <AdminSidebar />
                     </div>
                   </PrivateRoute>
                 }
               />
+              <Route index element={<AdminNewsList />} />
+              <Route path="news" element={<AdminNewsList />} />
+              <Route path="news/create" element={<AdminNewsList />} />
+              <Route path="news/edit/:id" element={<AdminNews />} />
+              {/* Сюда потом добавишь: <Route path="contacts" element={<AdminContacts />} /> */}
             </Routes>
           </Suspense>
         </main>
         <Sidebar />
-        <Footer/>
+        <Footer />
       </div>
     </BrowserRouter>
   );
