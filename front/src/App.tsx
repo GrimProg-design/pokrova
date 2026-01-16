@@ -5,6 +5,7 @@ import Navigation from "./header/navigation/Navigation";
 import Sidebar from "./sidebar/Sidebar";
 import { Suspense, lazy } from "react";
 import { PrivateRoute } from "./defence/PrivateRoute";
+import { Outlet } from "react-router-dom";
 
 // Шапка сайта
 const Home = lazy(() => import("./pages/home/Home"));
@@ -88,23 +89,29 @@ function App() {
               {/* Ошибки */}
               <Route path="*" element={<NotFound />} />
 
+              {/* Роут для логина оставляем как есть */}
               <Route path="/login" element={<Login />} />
 
+              {/* Группируем всю админку */}
               <Route
                 path="/admin"
                 element={
                   <PrivateRoute>
-                    <div className="admin-layout">
+                    <div className="admin-wrapper">
                       <AdminSidebar />
+                      <div className="admin-main-content">
+                        <Outlet />{" "}
+                      </div>
                     </div>
                   </PrivateRoute>
                 }
-              />
-              <Route index element={<AdminNewsList />} />
-              <Route path="news" element={<AdminNewsList />} />
-              <Route path="news/create" element={<AdminNewsList />} />
-              <Route path="news/edit/:id" element={<AdminNews />} />
-              {/* Сюда потом добавишь: <Route path="contacts" element={<AdminContacts />} /> */}
+              >
+                {/* Это вложенные пути. Они будут добавляться к /admin/ */}
+                <Route index element={<AdminNewsList />} />
+                <Route path="news" element={<AdminNewsList />} />
+                <Route path="news/create" element={<AdminNews />} />
+                <Route path="news/edit/:id" element={<AdminNews />} />
+              </Route>
             </Routes>
           </Suspense>
         </main>
