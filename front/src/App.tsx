@@ -47,6 +47,7 @@ const Login = lazy(() => import("./pages/Login"));
 const AdminNews = lazy(() => import("./pages/admin/NewsCreate"));
 const AdminSidebar = lazy(() => import("./pages/admin/AdminSidebar"));
 const AdminNewsList = lazy(() => import("./pages/admin/AdminNewsList"));
+const AdminSection = lazy(() => import("./pages/admin/SectionCreate"))
 
 function App() {
   return (
@@ -111,6 +112,7 @@ function App() {
                 <Route path="news" element={<AdminNewsList />} />
                 <Route path="news/create" element={<AdminNews />} />
                 <Route path="news/edit/:id" element={<AdminNews />} />
+                <Route path="section" element={<AdminSection/>}/>
               </Route>
             </Routes>
           </Suspense>

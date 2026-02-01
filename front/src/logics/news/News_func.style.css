@@ -219,3 +219,51 @@
   grid-row: auto !important;
   height: 232px; /* Чтобы все были одной высоты */
 }
+
+/* --- АДАПТИВ --- */
+
+/* Планшеты (до 1024px) */
+@media (max-width: 1024px) {
+  .news-wrapper[class*="news-count-"] {
+    /* Сбрасываем твою хитрую сетку в 2 колонки */
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: auto !important;
+    grid-auto-rows: 232px;
+  }
+
+  /* Сбрасываем все позиционирования nth-child, чтобы карточки шли по порядку */
+  .news-wrapper[class*="news-count-"] .news-card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+  
+  /* Если новостей нечетное количество, последнюю можно растянуть на всю ширину для красоты */
+  .news-wrapper[class*="news-count-5"] .news-card:nth-child(5),
+  .news-wrapper[class*="news-count-3"] .news-card:nth-child(3) {
+    grid-column: span 2 !important;
+  }
+}
+
+/* Телефоны (до 600px) */
+@media (max-width: 600px) {
+  .news-wrapper {
+    /* На маленьких экранах лучше всё в одну колонку */
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: 250px !important;
+    gap: 10px;
+  }
+
+  .news-wrapper[class*="news-count-"] .news-card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .news-card-title {
+    font-size: 1.1rem; /* Чуть уменьшим шрифт заголовка */
+  }
+  
+  /* Сброс для архива (тоже в 1 колонку) */
+  .news-archive-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -9,9 +9,13 @@ interface SectionProp {
 
 export default function Section_func({ sections }: SectionProp): JSX.Element {
   const API_URL = "http://localhost:3000";
+  const count = sections.length;
+
+  // Динамически формируем имя класса: sections-wrapper + sections-count-X
+  const wrapperClass = `sections-wrapper sections-count-${Math.min(count, 4)}`;
 
   return (
-    <div className="sections-wrapper">
+    <div className={wrapperClass}> {/* ТЕПЕРЬ КЛАСС БУДЕТ МЕНЯТЬСЯ */}
       {sections.map((section) => {
         const backgroundImage = section.imagePath
           ? `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url(${API_URL}${section.imagePath})`
@@ -24,9 +28,7 @@ export default function Section_func({ sections }: SectionProp): JSX.Element {
             className="section-item-link"
             style={{ backgroundImage }}
           >
-            <article className="section-item">
-              <h3 className="section-title">{section.title}</h3>
-            </article>
+            <h3 className="section-title">{section.title}</h3>
           </Link>
         );
       })}

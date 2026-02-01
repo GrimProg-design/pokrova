@@ -19,6 +19,7 @@ export default function AdminSidebar() {
         <div className="nav-group">ХРАМ</div>
         <Link to="/admin/contacts">Контакты</Link>
         <Link to="/admin/schedule">Расписание</Link>
+        <Link to="/admin/section">Секция</Link>
         
         <div className="nav-group">МАГАЗИН</div>
         <Link to="/admin/adverts">Объявления</Link>
