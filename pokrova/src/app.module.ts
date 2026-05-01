@@ -12,6 +12,7 @@ import { join } from 'path';
 import { AuthController } from './auth/auth.controller';
 import { AdvertsModule } from './adverts/adverts.module';
 import { ContactsModule } from './contacts/contacts.module';
+import { ScheduleModule } from './schedule/schedule.module';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { ContactsModule } from './contacts/contacts.module';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         autoLoadEntities: true,
-        synchronize: true,
+        synchronize: true, // это нужно только для разработки нельзя забывать
       }),
     }),
     TypeOrmModule.forFeature([Post]),
@@ -41,6 +42,7 @@ import { ContactsModule } from './contacts/contacts.module';
     }),
     AdvertsModule,
     ContactsModule,
+    ScheduleModule,
   ],
   controllers: [AppController, AuthController, AuthController],
   providers: [AppService],
