@@ -20,7 +20,7 @@ export default function History(): JSX.Element {
   if (!data) return <div>Загрузка истории...</div>;
 
   return (
-    <section aria-labelledby="history-title" className="history-section">
+    <section aria-labelledby="history-title" className="history-section"> 
       <h2 className="h2-title">{data.title}</h2>
       <div 
         className="history-content"
