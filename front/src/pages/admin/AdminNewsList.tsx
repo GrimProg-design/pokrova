@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 
-// 1. Описываем тип новости, чтобы уйти от 'any'
 interface INewsItem {
   id: number;
   title: string;
@@ -10,10 +9,9 @@ interface INewsItem {
 }
 
 export default function AdminNewsList() {
-  const [news, setNews] = useState<INewsItem[]>([]); // Типизируем массив
+  const [news, setNews] = useState<INewsItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  // 2. Используем useCallback, чтобы функция не пересоздавалась при каждом рендере
   const loadNews = useCallback(async () => {
     setLoading(true);
     try {
@@ -21,7 +19,6 @@ export default function AdminNewsList() {
       if (!res.ok) throw new Error("Ошибка загрузки");
       const data = await res.json();
 
-      // Если бэк возвращает объект с полем items (как в архиве), берем его
       const newsArray = Array.isArray(data) ? data : data.items;
       setNews(newsArray || []);
     } catch (error) {
@@ -31,7 +28,6 @@ export default function AdminNewsList() {
     }
   }, []);
 
-  // Теперь вызываем загрузку. Линтер будет доволен.
   useEffect(() => {
     loadNews();
   }, [loadNews]);
@@ -48,7 +44,7 @@ export default function AdminNewsList() {
       });
 
       if (res.ok) {
-        loadNews(); // Перезагружаем список после удаления
+        loadNews();
       } else {
         alert("Ошибка при удалении");
       }
